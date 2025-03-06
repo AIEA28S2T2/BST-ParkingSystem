@@ -1,7 +1,7 @@
 package DataStructures;
 
 public final class Node {
-    final int spotID;
+    int spotID;
     Node parent, left, right;
     String regNo;
 

@@ -26,8 +26,8 @@ public abstract class Tree {
             insertSpot(node);
         }
     }
-    protected abstract Node searchForFreeSpot(); //returns spotID of the first free spot//hgf
-    protected abstract Node removeSpot(Node node);
+    protected abstract int searchForFreeSpot(); //returns spotID of the first free spot
+    protected abstract Node removeSpot(Node root, int x);
     protected abstract void insertSpot(Node node);
 
 }

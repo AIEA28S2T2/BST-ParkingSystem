@@ -2,22 +2,40 @@ package DataStructures;
 
 public class BinarySearchTree extends Tree {
 
-    @Override
     protected Node searchForFreeSpot() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'searchForFreeSpot'");
+        
     }
 
-    @Override
+
     protected Node removeSpot(Node node) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeSpot'");
+        
     }
 
-    @Override
+
     protected void insertSpot(Node node) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insertSpot'");
+        if (Root == null) {
+            Root = node;
+        } else {
+            Node current = Root;
+            Node parent = null;
+            while (true) {
+                parent = current;
+                if (node.spotID < current.spotID) {
+                    current = current.left;
+                    if (current == null) {
+                        parent.left = node;
+                        return;
+                    }
+                } else {
+                    current = current.right;
+                    if (current == null) {
+                        parent.right = node;
+                        return;
+                    }
+                }
+            }
+        }
+        
     }
     
 }

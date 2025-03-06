@@ -1,31 +1,40 @@
+import java.time.LocalDateTime;
+import java.util.Scanner;
 import DataStructures.*;
 
 /*
-First
-Get the input of how many parking spaces are available in the place, 
-and create a new binary tree by calling the createTree method from the BinarySearchTree class.
-
-Then the upcoming things should be in a loop:
-    Ask if the user wants to park a car or remove a car from the parking lot.
-        If the user wants to park:
-            Find a free spot by calling the searchForFreeSpot method from the BinarySearchTree class.
-            (If there is no free spot, print "No free spots available".)
-            then pipe it into the enqueue function from DefinitelyNotAQueue class.
-            And add the regNo to the node.
-
-        If the user wants to remove a car:
-            Ask for the registration number of the car.
-            Find the node with the registration number by calling the findAndPop method from the DefinitelyNotAQueue class.
-            If the node is found, remove the node from the DefinitelyNotAQueue by calling the findAndPop method then pipe it into insertSpot.
-            If the node is not found, print "Car not found".
-        
-That's all I can think of at the moment; You guys can make necessary changes.
-
-Maybe add an option to type 0 while inside the loop to enter a secret maintenance mode which clears both the tree and the DefinitelyNotAQueue. 
-Just calling two functions.
-            
+I have no idea why I wrote such a messy procedure here; I forgot the fact that all the methods could be called in the correct
+order inside the ParkingSystem class anyway; that'd keep this place cleaner
 */
 
 public class Main {
-    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of parking spots: ");
+        int n = scanner.nextInt();
+        ParkingSystem parkingSystem = new ParkingSystem(n);
+
+        while (true) {
+            System.out.println("Enter 1 to add a car, 2 to remove a car, or 0 to exit:");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // consume newline
+
+            if (choice == 0) {
+                break;
+            }
+
+            System.out.print("Enter the registration number: ");
+            String regNo = scanner.nextLine();
+
+            if (choice == 1) {
+                parkingSystem.addCar(regNo);
+            } else if (choice == 2) {
+                parkingSystem.removeCar(regNo);
+            } else {
+                System.out.println("Invalid choice. Please try again.");
+            }
+        }
+
+        scanner.close();
+    }
 }

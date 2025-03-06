@@ -18,5 +18,24 @@ Create the following methods here:
  */
 
 public class ParkingSystem {
+    private BinarySearchTree tree = new BinarySearchTree();
+    private DefinitelyNotAQueue queue = new DefinitelyNotAQueue();
+    
+    public ParkingSystem(int n){
+        tree.createTree(n);
+    }
+
+    public void addCar(String RegNo){
+        int spotID = tree.searchForFreeSpot();
+        Node node = tree.removeSpot(tree.Root, spotID);
+        queue.enqueue(node);
+        node.setRegNo(RegNo);
+    }
+
+    public void removeCar(String RegNo){
+        Node node = queue.findAndPop(RegNo);
+        node.setRegNo(null);
+        tree.insertSpot(node);
+    }
     
 }

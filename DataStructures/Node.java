@@ -12,4 +12,7 @@ public final class Node {
         regNo = null;
  
     }
+    protected void setRegNo(String regNo){
+        this.regNo = regNo;
+    }
 }

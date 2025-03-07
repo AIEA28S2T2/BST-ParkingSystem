@@ -29,7 +29,13 @@ public class DefinitelyNotAQueue {
         while (current != null) {
             if (current.regNo.equals(regno)) {
                 if (previous == null) {
-                    head = current.right;
+                    if (current.right != null){
+                        head = current.right
+                    }
+                    else{
+                        head = null;
+                        tail = null;
+                    }
                 } else {
                     previous.right = current.right;
                 }

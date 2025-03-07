@@ -42,10 +42,10 @@ public class BinarySearchTree extends Tree {
     
     protected void inOrder(Node node){
         if (node != null){
-            inOrder(node.left);
+            if(node.left != null){inOrder(node.left)}
             System.out.println(node.spotID);
             System.out.println(node.regNo);
-            inOrder(node.right);
+            if(node.right != null){inOrder(node.right)}
         }
     }
 

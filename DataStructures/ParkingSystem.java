@@ -38,4 +38,8 @@ public class ParkingSystem {
         tree.insertSpot(node);
     }
     
+    public void showTreeAndQueue(){
+        tree.inOrder(tree.Root);
+        queue.showQueue();
+    }
 }

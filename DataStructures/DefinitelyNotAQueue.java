@@ -53,9 +53,22 @@ public class DefinitelyNotAQueue {
                 next = current.right;
             }
         }
-        next = null;
-        current = null;
     }
-
+    protected void showQueue(){
+        if(head==null){
+            System.out.println("oops the queue is empty");
+            return;
+        }
+        Node current = head;
+        while(current.right != null){
+            System.out.println(current.regNo);
+            System.out.println(current.spotID);
+            System.out.println();
+            current = current.right;
+        }
+        System.out.println(current.regNo);
+        System.out.println(current.spotID);
+        System.out.println();
+    }
 
 }

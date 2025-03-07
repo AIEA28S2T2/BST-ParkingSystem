@@ -40,6 +40,15 @@ public class BinarySearchTree extends Tree {
         return curr;
     }  
     
+    protected void inOrder(Node node){
+        if (node != null){
+            inOrder(node.left);
+            System.out.println(node.spotID);
+            System.out.println(node.regNo);
+            inOrder(node.right);
+        }
+    }
+
     protected void insertSpot(Node node) {
         if (Root == null) {
             Root = node;

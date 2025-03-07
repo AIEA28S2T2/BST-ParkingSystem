@@ -92,5 +92,22 @@ public class LowEffortBST {
         }
         return curr;
     }  
+
+        // Inorder Traversal
+        public static void printInorder(Node node)
+        {
+            if (node == null)
+                return;
+    
+            // Traverse left subtree
+            printInorder(node.left);
+    
+            // Visit node
+            System.out.print(node.data + " ");
+    
+            // Traverse right subtree
+            printInorder(node.right);
+        }
+        
     
 }

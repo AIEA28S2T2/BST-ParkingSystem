@@ -19,16 +19,6 @@ public abstract class Tree {
         node.right = null;
         node.parent = null;
     } 
-
-    protected void inOrder(Node node){
-        if (node != null){
-            if(node.left != null)inOrder(node.left);
-            System.out.println(node.spotID);
-            System.out.println(node.regNo);
-            System.out.println();
-            if(node.right != null)inOrder(node.right);
-        }
-    }
     
     protected abstract Node searchForFreeSpot(); //returns spotID of the first free spot
     protected abstract Node removeSpot(Node node);

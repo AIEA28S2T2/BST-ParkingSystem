@@ -1,16 +1,15 @@
 package DataStructures;
 
-public final class Node {
+public class Node {
     int spotID;
     Node parent, left, right;
     String regNo;
 
-    Node(int key)
+    Node(int number)
     {
-        spotID = key;
+        spotID = number;
         parent = left = right = null;
         regNo = null;
- 
     }
     protected void setRegNo(String regNo){
         this.regNo = regNo;

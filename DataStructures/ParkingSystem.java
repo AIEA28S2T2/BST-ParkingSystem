@@ -36,11 +36,10 @@ public class ParkingSystem {
         node.setRegNo(null);
         tree.insertSpot(node);
     }
-    
-    public void showTreeAndQueue(){
-        System.out.println("Tree:");
-        tree.inOrder(tree.Root);
-        System.out.println("Queue:");
-        queue.showQueue();
+    public void printTree(){
+        tree.printTree();
+    }
+    public void printQueue(){
+        queue.printQueue();
     }
 }

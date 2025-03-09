@@ -11,30 +11,25 @@ public class CustomLinkedList {
     protected Node head = null;
     protected Node tail = null;
 
-    protected void enqueue(Node node){
-        node.parent = null;
-        node.left = null;
+    protected void enqueue(Node node) {
         if (head == null) {
             head = node;
             tail = node;
-            node.right = null;
         } else {
             tail.right = node;
             tail = node;
-            node.right = null;
         }
     }
 
-    protected Node findAndPop(String regno){
+    protected Node findAndPop(String regno) {
         Node current = head;
         Node previous = null;
         while (current != null) {
             if (current.regNo.equals(regno)) {
                 if (previous == null) {
-                    if (current.right != null){
+                    if (current.right != null) {
                         head = current.right;
-                    }
-                    else{
+                    } else {
                         head = null;
                         tail = null;
                     }
@@ -49,35 +44,36 @@ public class CustomLinkedList {
         return null;
     }
 
-    protected void clearQueue(){
+    protected void clearQueue() {
+        if (head == null) {
+            return; // Queue is already empty
+        }
+        
         Node current = head;
-        head = null;
-        tail = null;
-        Node next = current.right;
-        while (current.right != null) {
+        while (current != null) {
+            Node next = current.right;
             current.right = null;
             current = next;
-            if (current.right != null){
-                next = current.right;
-            }
         }
+        
+        head = null;
+        tail = null;
     }
-    protected void showQueue(){
-        if(head==null){
+    public void printQueue() {
+        System.out.println("Printing Queue Contents:");
+        if (head == null) {
             System.out.println("The queue is empty");
             return;
         }
+        
+        int position = 1;
         Node current = head;
-        while(current.right != null){
-            System.out.println(current.regNo);
-            System.out.println(current.spotID);
-            System.out.println();
+        while (current != null) {
+            System.out.println("Position " + position + ": Spot ID: " + current.spotID + 
+                              ", Registration: " + (current.regNo != null ? current.regNo : "None"));
             current = current.right;
+            position++;
         }
-        if (current.regNo != null){
-            System.out.println(current.regNo);
-            System.out.println(current.spotID);
-            System.out.println();
-        }
+        System.out.println("End of queue");
     }
 }

@@ -13,12 +13,12 @@ public class Main {
         System.out.print("Enter the number of parking spots: ");
         int n = scanner.nextInt();
         ParkingSystem parkingSystem = new ParkingSystem(n);
+        parkingSystem.printTree();
 
         while (true) {
             System.out.println("Enter 1 to add a car, 2 to remove a car, or 0 to exit:");
             int choice = scanner.nextInt();
             scanner.nextLine(); // consume newline
-
             if (choice == 0) {
                 break;
             }
@@ -27,20 +27,27 @@ public class Main {
             String regNo = scanner.nextLine();
 
             if (choice == 1) {
-                parkingSystem.showTreeAndQueue();
-                parkingSystem.addCar(regNo);
-                parkingSystem.showTreeAndQueue();
+                System.out.println("Before:");
+                parkingSystem.printTree();
+                parkingSystem.printQueue();
+                parkingSystem.addCar(regNo);       
+                System.out.println("After:");
+                parkingSystem.printTree();
+                parkingSystem.printQueue();
                 System.out.println("Car added successfully.");
             } else if (choice == 2) {
-                parkingSystem.showTreeAndQueue();
+                System.out.println("Before:");
+                parkingSystem.printTree();
+                parkingSystem.printQueue();
                 parkingSystem.removeCar(regNo);
-                parkingSystem.showTreeAndQueue();
+                System.out.println("After:");
+                parkingSystem.printTree();
+                parkingSystem.printQueue();
                 System.out.println("Car removed successfully.");
             } else {
                 System.out.println("Invalid choice. Please try again.");
             }
         }
-
         scanner.close();
     }
 }

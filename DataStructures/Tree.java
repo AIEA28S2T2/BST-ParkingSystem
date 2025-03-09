@@ -22,16 +22,47 @@ public abstract class Tree {
 
     protected void inOrder(Node node){
         if (node != null){
-            if(node.left != null){inOrder(node.left);}
+            if(node.left != null)inOrder(node.left);
             System.out.println(node.spotID);
             System.out.println(node.regNo);
             System.out.println();
-            if(node.right != null){inOrder(node.right);}
+            if(node.right != null)inOrder(node.right);
         }
     }
     
     protected abstract Node searchForFreeSpot(); //returns spotID of the first free spot
     protected abstract Node removeSpot(Node node);
     protected abstract void insertSpot(Node node);
+
+public void printTree() {
+    System.out.println("Printing Tree Structure:");
+    if (Root == null) {
+        System.out.println("Tree is empty");
+        return;
+    }
+    printTreeRecursive(Root, 0, "Root: ");
+}
+
+private void printTreeRecursive(Node node, int level, String prefix) {
+    if (node == null) return;
+    
+    String indent = "  ".repeat(level);
+    System.out.println(indent + prefix + "Spot ID: " + node.spotID + 
+                      (node.regNo != null ? ", RegNo: " + node.regNo : ", Available"));
+    
+    if (node.left != null || node.right != null) {
+        if (node.left != null) {
+            printTreeRecursive(node.left, level + 1, "L-> ");
+        } else {
+            System.out.println(indent + "  " + "L-> null");
+        }
+        
+        if (node.right != null) {
+            printTreeRecursive(node.right, level + 1, "R-> ");
+        } else {
+            System.out.println(indent + "  " + "R-> null");
+        }
+    }
+}
 
 }

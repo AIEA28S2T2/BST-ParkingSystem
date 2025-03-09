@@ -7,7 +7,7 @@ package DataStructures;
     * We'll only be searching from top to bottom anyway
 */
 
-public class DefinitelyNotAQueue {
+public class CustomLinkedList {
     protected Node head = null;
     protected Node tail = null;
 

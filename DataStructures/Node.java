@@ -7,7 +7,7 @@ public class Node {
 
     Node(int number)
     {
-        spotID = number;
+        this.spotID = number;
         parent = left = right = null;
         regNo = null;
     }

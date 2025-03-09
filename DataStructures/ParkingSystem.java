@@ -19,7 +19,7 @@ Create the following methods here:
 
 public class ParkingSystem {
     private BinarySearchTree tree = new BinarySearchTree();
-    private DefinitelyNotAQueue queue = new DefinitelyNotAQueue();
+    private CustomLinkedList queue = new CustomLinkedList();
     
     public ParkingSystem(int n){
         tree.createTree(n);

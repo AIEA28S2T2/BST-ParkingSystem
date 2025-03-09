@@ -62,7 +62,7 @@ public class DefinitelyNotAQueue {
     }
     protected void showQueue(){
         if(head==null){
-            System.out.println("oops the queue is empty");
+            System.out.println("The queue is empty");
             return;
         }
         Node current = head;
@@ -72,9 +72,10 @@ public class DefinitelyNotAQueue {
             System.out.println();
             current = current.right;
         }
-        System.out.println(current.regNo);
-        System.out.println(current.spotID);
-        System.out.println();
+        if (current.regNo != null){
+            System.out.println(current.regNo);
+            System.out.println(current.spotID);
+            System.out.println();
+        }
     }
-
 }

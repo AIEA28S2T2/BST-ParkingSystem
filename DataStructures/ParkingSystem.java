@@ -39,7 +39,9 @@ public class ParkingSystem {
     }
     
     public void showTreeAndQueue(){
+        System.out.println("Tree:");
         tree.inOrder(tree.Root);
+        System.out.println("Queue:");
         queue.showQueue();
     }
 }

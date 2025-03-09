@@ -39,15 +39,6 @@ public class BinarySearchTree extends Tree {
         }
         return curr;
     }  
-    
-    protected void inOrder(Node node){
-        if (node != null){
-            if(node.left != null){inOrder(node.left);}
-            System.out.println(node.spotID);
-            System.out.println(node.regNo);
-            if(node.right != null){inOrder(node.right);}
-        }
-    }
 
     protected void insertSpot(Node node) {
         if (Root == null) {

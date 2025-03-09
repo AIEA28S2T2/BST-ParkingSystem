@@ -28,9 +28,11 @@ public class Main {
 
             if (choice == 1) {
                 parkingSystem.addCar(regNo);
+                parkingSystem.showTreeAndQueue();
                 System.out.println("Car added successfully.");
             } else if (choice == 2) {
                 parkingSystem.removeCar(regNo);
+                parkingSystem.showTreeAndQueue();
                 System.out.println("Car removed successfully.");
             } else {
                 System.out.println("Invalid choice. Please try again.");

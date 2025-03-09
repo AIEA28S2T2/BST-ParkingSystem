@@ -26,8 +26,7 @@ public class ParkingSystem {
     }
 
     public void addCar(String RegNo){
-        int spotID = tree.searchForFreeSpot();
-        Node node = tree.removeSpot(tree.Root, spotID);
+        Node node = tree.removeSpot(tree.searchForFreeSpot());
         queue.enqueue(node);
         node.setRegNo(RegNo);
     }

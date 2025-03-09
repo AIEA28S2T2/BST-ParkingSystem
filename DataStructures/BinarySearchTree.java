@@ -2,43 +2,91 @@ package DataStructures;
 
 public class BinarySearchTree extends Tree {
 
-    protected int searchForFreeSpot() {
+    protected Node searchForFreeSpot() {
         Node current = Root;
         while (current.left != null){
             current = current.left;
         }
-        return current.spotID;
+        return current;
     }
 
-    protected Node removeSpot(Node root, int x) {
-        if (root == null){
-            return root;
+    protected void createTree(int numberOfNodes){
+        int[] spots = new int[numberOfNodes];
+        for (int i = 0; i < numberOfNodes; i++) {
+            spots[i] = i + 1;
         }
-
-        if (root.spotID > x){
-            root.left = removeSpot(root.left, x);
-        } else if (root.spotID < x){
-            root.right = removeSpot(root.right, x);
+        createBalancedBST(spots, 0, numberOfNodes - 1);
+    }
+    
+    private void createBalancedBST(int[] spots, int start, int end) {
+        if (start > end) {
+            return;
+        }
+        int mid = (start + end) / 2;
+        Node node = new Node(spots[mid]);
+        if (Root == null) {
+            Root = node;
         } else {
-            if (root.left == null){
-                return root.right;
-            }
-            if (root.right == null){
-                return root.left;
-            }
-            Node succ = getSuccessor(root);
-            root.spotID = succ.spotID;
-            root.right = removeSpot(root.right, succ.spotID);
+            insertSpot(node);
         }
-        return root;
+        createBalancedBST(spots, start, mid - 1);
+        createBalancedBST(spots, mid + 1, end);
     }
-    static Node getSuccessor(Node curr) {
-        curr = curr.right;
-        while (curr != null && curr.left != null) {
-            curr = curr.left;
+
+    protected Node removeSpot(Node node) {
+        //1. if both children are empty
+        if (node.left == null && node.right == null) {
+            node.parent = null;
+            return node;
+
+        //2. if left child is empty
+        } else if (node.left == null) {
+            if (node.parent.left == node){
+                node.right.parent = node.parent;
+                node.parent.left = node.right;
+            }else{
+                node.right.parent = node.parent;
+                node.parent.right = node.right;
+            }
+            node.right = null;
+            node.parent = null;
+            return node;
+        //3. if right child is empty
+        } else if (node.right == null){
+            if (node.parent.left == node){
+                node.left.parent = node.parent;
+                node.parent.left = node.left;
+            }else{
+                node.left.parent = node.parent;
+                node.parent.right = node.left;
+            }
+            node.left = null;
+            node.parent = null;
+            return node;
+        } else { //both children are present
+            Node theChosenOne = node.right;
+            while (theChosenOne.left != null){
+                theChosenOne = theChosenOne.left;
+            } //now, theChosenOne is the inorder successor of the node to be deleted
+            Node temp = removeSpot(theChosenOne); //removes the inorder successor from its original position AND connects its child to the inorder successor's parent
+            if (node.parent.left == node){
+                node.parent.left = temp;
+            }else{
+                node.parent.right = temp;
+            } //detaches the node to be deleted, and connects the inorder successor to its spot
+            temp.left = node.left;
+            node.left = null;
+
+            temp.right = node.right;
+            node.right = null;
+
+            temp.parent = node.parent;
+            node.parent = null;
+
+            return node;
         }
-        return curr;
-    }  
+    }
+            
 
     protected void insertSpot(Node node) {
         if (Root == null) {

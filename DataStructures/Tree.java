@@ -20,13 +20,6 @@ public abstract class Tree {
         node.parent = null;
     } 
 
-    protected void createTree(int numberOfNodes){
-        for (int i = 1; i <= numberOfNodes; i++) {
-            Node node = new Node(i);
-            insertSpot(node);
-        }
-    }
-
     protected void inOrder(Node node){
         if (node != null){
             if(node.left != null){inOrder(node.left);}
@@ -37,8 +30,8 @@ public abstract class Tree {
         }
     }
     
-    protected abstract int searchForFreeSpot(); //returns spotID of the first free spot
-    protected abstract Node removeSpot(Node root, int x);
+    protected abstract Node searchForFreeSpot(); //returns spotID of the first free spot
+    protected abstract Node removeSpot(Node node);
     protected abstract void insertSpot(Node node);
 
 }

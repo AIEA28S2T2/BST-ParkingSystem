@@ -35,10 +35,8 @@ public void printTree() {
 
 private void printTreeRecursive(Node node, int level, String prefix) {
     if (node == null) return;
-    
     String indent = "  ".repeat(level);
-    System.out.println(indent + prefix + "Spot ID: " + node.spotID + 
-                      (node.regNo != null ? ", RegNo: " + node.regNo : ", Available"));
+    System.out.println(indent + prefix + "Spot ID: " + node.spotID);
     
     if (node.left != null || node.right != null) {
         if (node.left != null) {

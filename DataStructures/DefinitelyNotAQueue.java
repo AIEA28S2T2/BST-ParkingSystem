@@ -17,9 +17,11 @@ public class DefinitelyNotAQueue {
         if (head == null) {
             head = node;
             tail = node;
+            node.right = null;
         } else {
             tail.right = node;
             tail = node;
+            node.right = null;
         }
     }
 

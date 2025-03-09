@@ -27,10 +27,12 @@ public class Main {
             String regNo = scanner.nextLine();
 
             if (choice == 1) {
+                parkingSystem.showTreeAndQueue();
                 parkingSystem.addCar(regNo);
                 parkingSystem.showTreeAndQueue();
                 System.out.println("Car added successfully.");
             } else if (choice == 2) {
+                parkingSystem.showTreeAndQueue();
                 parkingSystem.removeCar(regNo);
                 parkingSystem.showTreeAndQueue();
                 System.out.println("Car removed successfully.");

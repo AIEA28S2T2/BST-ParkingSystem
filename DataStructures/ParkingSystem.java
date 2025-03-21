@@ -1,45 +1,56 @@
 package DataStructures;
 
-/*
-In the constructor, get int n as input and create the new tree upon initialization
-
-Create the following methods here:
- 1. add a car to the parking lot:
-    find a free spot(spotID)
-    add the node into the queue
-    get input for regNo and make changes to the node
-    
-2. remove a car from the parking lot:
-    get input for regNo
-    search for the node with the regNo
-    remove the node from the queue
-    add the node back to the tree
-    
- */
-
 public class ParkingSystem {
-    private BinarySearchTree tree = new BinarySearchTree();
+    private Tree tree;
     private CustomLinkedList queue = new CustomLinkedList();
     
-    public ParkingSystem(int n){
-        tree.createTree(n);
+    // Tree type constants
+    public static final int BST = 0;
+    public static final int AVL = 1;
+    public static final int RED_BLACK = 2;
+    
+    public ParkingSystem(int n) {
+        this(n, BST); // Default to BST
+    }
+    
+    public ParkingSystem(int n, int treeType) {
+        switch (treeType) {
+            case AVL:
+                tree = new AVLTree();
+                ((AVLTree)tree).createTree(n);
+                break;
+            case RED_BLACK:
+                tree = new RedBlackTree();
+                ((RedBlackTree)tree).createTree(n);
+                break;
+            default: // BST
+                tree = new BinarySearchTree();
+                ((BinarySearchTree)tree).createTree(n);
+                break;
+        }
     }
 
-    public void addCar(String RegNo){
+    public void addCar(String RegNo) {
         Node node = tree.removeSpot(tree.searchForFreeSpot());
         queue.enqueue(node);
         node.setRegNo(RegNo);
     }
 
-    public void removeCar(String RegNo){
+    public void removeCar(String RegNo) {
         Node node = queue.findAndPop(RegNo);
-        node.setRegNo(null);
-        tree.insertSpot(node);
+        if (node != null) {
+            node.setRegNo(null);
+            tree.insertSpot(node);
+        } else {
+            System.out.println("Car with registration number " + RegNo + " not found.");
+        }
     }
-    public void printTree(){
+    
+    public void printTree() {
         tree.printTree();
     }
-    public void printQueue(){
+    
+    public void printQueue() {
         queue.printQueue();
     }
 }

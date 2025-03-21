@@ -2,17 +2,38 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 import DataStructures.*;
 
-/*
-I have no idea why I wrote such a messy procedure here; I forgot the fact that all the methods could be called in the correct
-order inside the ParkingSystem class anyway; that'd keep this place cleaner
-*/
-
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Select the tree implementation:");
+        System.out.println("1. Binary Search Tree");
+        System.out.println("2. AVL Tree");
+        System.out.println("3. Red-Black Tree");
+        System.out.print("Enter choice (1-3): ");
+        
+        int treeChoice = scanner.nextInt();
+        int treeType;
+        
+        switch (treeChoice) {
+            case 2:
+                treeType = ParkingSystem.AVL;
+                System.out.println("Using AVL Tree");
+                break;
+            case 3:
+                treeType = ParkingSystem.RED_BLACK;
+                System.out.println("Using Red-Black Tree");
+                break;
+            default:
+                treeType = ParkingSystem.BST;
+                System.out.println("Using Binary Search Tree");
+                break;
+        }
+        
         System.out.print("Enter the number of parking spots: ");
         int n = scanner.nextInt();
-        ParkingSystem parkingSystem = new ParkingSystem(n);
+        ParkingSystem parkingSystem = new ParkingSystem(n, treeType);
+        System.out.println("Initial parking spot tree:");
         parkingSystem.printTree();
 
         while (true) {

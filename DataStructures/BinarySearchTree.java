@@ -1,8 +1,10 @@
 package DataStructures;
 
-public class BinarySearchTree extends Tree {
+public class BinarySearchTree implements Tree {
+    protected Node Root = null;
 
-    protected Node searchForFreeSpot() {
+    @Override
+    public Node searchForFreeSpot() {
         Node current = Root;
         while (current.left != null){
             current = current.left;
@@ -10,7 +12,7 @@ public class BinarySearchTree extends Tree {
         return current;
     }
 
-    protected void createTree(int numberOfNodes){
+    public void createTree(int numberOfNodes){
         int[] spots = new int[numberOfNodes];
         for (int i = 0; i < numberOfNodes; i++) {
             spots[i] = i + 1;
@@ -46,8 +48,8 @@ public class BinarySearchTree extends Tree {
         return node;
     }
     
-
-    protected Node removeSpot(Node node) {
+    @Override
+    public Node removeSpot(Node node) {
         //1. if both children are empty
         if (node.left == null && node.right == null) {
             if (node == Root) {
@@ -132,7 +134,8 @@ public class BinarySearchTree extends Tree {
         }
     }            
 
-    protected void insertSpot(Node node) {
+    @Override
+    public void insertSpot(Node node) {
         if (Root == null) {
             Root = node;
             node.parent = null;
@@ -154,9 +157,57 @@ public class BinarySearchTree extends Tree {
                         parent.right = node;
                         node.parent = parent;
                         return;
+                    }
                 }
             }
         }
     }
-}
+
+    @Override
+    public void clearTree() {
+        deleteSubTree(Root);
+        Root = null;
+    }
+    
+    private void deleteSubTree(Node node) {
+        if (node == null) {
+            return;
+        }
+        deleteSubTree(node.left);
+        deleteSubTree(node.right);
+        
+        node.left = null;
+        node.right = null;
+        node.parent = null;
+    }
+
+    @Override
+    public void printTree() {
+        System.out.println("Printing Tree Structure:");
+        if (Root == null) {
+            System.out.println("Tree is empty");
+            return;
+        }
+        printTreeRecursive(Root, 0, "Root: ");
+    }
+
+    private void printTreeRecursive(Node node, int level, String prefix) {
+        if (node == null) return;
+        String indent = "  ".repeat(level);
+        System.out.println(indent + prefix + "Spot ID: " + node.spotID);
+        
+        if (node.left != null || node.right != null) {
+            if (node.left != null) {
+                printTreeRecursive(node.left, level + 1, "L-> ");
+            } else {
+                System.out.println(indent + "  " + "L-> null");
+            }
+            
+            if (node.right != null) {
+                printTreeRecursive(node.right, level + 1, "R-> ");
+            } else {
+                System.out.println(indent + "  " + "R-> null");
+            }
+        }
+    }
 }
